@@ -4,7 +4,7 @@ Plugin Name: Bulglish permalinks
 Plugin URI: http://talkingaboutthis.eu
 Description: This plugins provides bulglish permalinks for cyrillic titles. Based on the work of Iacovos Constantinou
 Author: Boyan Raichev 
-Version: 1.0
+Version: 1.1.0
 Author URI: http://talkingaboutthis.eu/
 */
 
