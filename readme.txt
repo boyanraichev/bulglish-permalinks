@@ -36,6 +36,9 @@ It will also work for Russian permalinks, as it matches all the letters in the R
 
 == Changelog ==
 
+= 1.2.0 =
+* Works on front end saving of posts as well
+
 = 1.1.0 =
 * Added missing letters from Russian alphabet
 
@@ -44,6 +47,9 @@ It will also work for Russian permalinks, as it matches all the letters in the R
 
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Will work on front-end saving of posts as well
 
 = 1.1.0 =
 Added Russian letters
