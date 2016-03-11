@@ -3,19 +3,21 @@ Contributors: studioreforma
 Donate link: http://talkingaboutthis.eu/
 Tags: bulgarian, bulgarian permalink, cyrillic, slugs, transliteration 
 Requires at least: 3.0.1
-Tested up to: 4.1.0
-Stable tag: 1.2.0
+Tested up to: 4.4.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin converts Bulgarian cyrillic characters in slugs to Latin characters, according to the official rules for transliteration. 
+This plugin converts Bulgarian cyrillic characters in slugs and filenames to Latin characters, according to the official rules for transliteration. 
 
 == Description ==
 
-This plugin converts Bulgarian cyrillic characters in slugs to Latin characters, according to the official rules for transliteration.
+This plugin converts Bulgarian cyrillic characters in slugs and filenames to Latin characters, according to the official rules for transliteration.
 
 Cyrillic letters in URLs, while supported, are ugly and when copy/pasted around the internet are often encoded (converted to those ugly URLs looking like %DU^ED%…)
 The Plugin based on the work of Iacovos Constantinou for a similar plugin for greek alphabet.
+
+The plugin automatically converts slugs when a post is created, as well as file names, when a file is uploaded.
 
 It will also work for Russian permalinks, as it matches all the letters in the Russian alphabet, although the user should have in mind that there are minor differences in the common transliterations rules in the two languages.
 
@@ -36,6 +38,9 @@ It will also work for Russian permalinks, as it matches all the letters in the R
 
 == Changelog ==
 
+= 1.3.0 =
+* Now will auto convert filenames upon upload
+
 = 1.2.0 =
 * Works on front end saving of posts as well
 
@@ -47,6 +52,9 @@ It will also work for Russian permalinks, as it matches all the letters in the R
 
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+Auto converts filenames upon upload
 
 = 1.2.0 =
 Will work on front-end saving of posts as well

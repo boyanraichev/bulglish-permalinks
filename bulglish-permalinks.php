@@ -2,9 +2,9 @@
 /*
 Plugin Name: Bulglish permalinks
 Plugin URI: http://talkingaboutthis.eu
-Description: This plugins provides bulglish permalinks for cyrillic titles. Based on the work of Iacovos Constantinou
+Description: This plugins provides bulglish permalinks for cyrillic titles and filenames. Based on the work of Iacovos Constantinou
 Author: Boyan Raichev 
-Version: 1.2.0
+Version: 1.3.0
 Author URI: http://talkingaboutthis.eu/
 */
 
@@ -53,4 +53,11 @@ function bulglish_permalinks_title($text) {
 	return $text;
 }
 add_filter('sanitize_title', 'bulglish_permalinks_title', 1);
+
+// now also change filenames!
+function bulglish_filenames( $file ){
+    $file['name'] = bulglish_permalinks_title($file['name']);
+    return $file;
+}
+add_filter('wp_handle_upload_prefilter', 'bulglish_filenames' );
 ?>
