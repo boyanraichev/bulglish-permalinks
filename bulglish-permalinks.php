@@ -1,14 +1,13 @@
 <?php 
 /*
 Plugin Name: Bulglish permalinks
-Plugin URI: http://talkingaboutthis.eu
-Description: This plugins provides bulglish permalinks for cyrillic titles and filenames. Based on the work of Iacovos Constantinou
+Plugin URI: https://github.com/talkingaboutthis/bulglish-permalinks
+Description: This plugins transliterates cyrillic URL slugs to latin characters.
 Author: Boyan Raichev 
-Version: 1.3.0
+Version: 1.4.0
 Author URI: http://talkingaboutthis.eu/
 */
 
-// Based on http://www.freestuff.gr/forums/viewtopic.php?p=194579#194579
 function bulglish_permalinks_title($text) {
 	
 	$expressions = array(
@@ -59,5 +58,8 @@ function bulglish_filenames( $file ){
     $file['name'] = bulglish_permalinks_title($file['name']);
     return $file;
 }
-add_filter('wp_handle_upload_prefilter', 'bulglish_filenames' );
+
+if (!defined('CYR2LAT_FILENAMES') OR CYR2LAT_FILENAMES==true) {
+	add_filter('wp_handle_upload_prefilter', 'bulglish_filenames' );
+}
 ?>
