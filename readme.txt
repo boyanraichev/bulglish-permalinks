@@ -1,10 +1,10 @@
 === Bulglish Permalinks ===
-Contributors: studioreforma
-Donate link: http://talkingaboutthis.eu/
+Contributors: studioreforma, nravota12, kozzmen
 Tags: bulgarian, bulgarian permalink, cyrillic, slugs, transliteration 
-Requires at least: 3.0.1
-Tested up to: 4.7
-Stable tag: 1.4.0
+Requires at least: 4.0
+Tested up to: 7.0
+Requires PHP: 5.6
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,8 +36,18 @@ define('CYR2LAT_FILENAMES',false);
 
 == Screenshots ==
 
-
 == Changelog ==
+
+= 1.5.0 =
+* Project improvements:
+* Optimized the translation map, so it is built only once per request.
+* Replaced 30+ individual `preg_replace()` regex passes with a single, faster `strtr()` lookup
+* Added `ABSPATH` direct-access safety guard
+* Removed the trailing PHP close tag.
+_ Tested the plugin with wp version 7.0
+
+= 1.4.1 =
+* WP5 supported
 
 = 1.4.0 =
 * File names transliteration now optional
@@ -54,21 +64,8 @@ define('CYR2LAT_FILENAMES',false);
 = 1.0.0 =
 * First release
 
-
 == Upgrade Notice ==
 
-= 1.4.0 =
-File names transliteration now optional
-
-= 1.3.0 =
-Auto converts filenames upon upload
-
-= 1.2.0 =
-Will work on front-end saving of posts as well
-
-= 1.1.0 =
-Added Russian letters
-
-= 1.0.0 =
-First release
-
+= 1.5.0 =
+* Atanas Yonkov and Stefan Velev (WordCamp Sofia organizers) have been added as project contributors.
+* The are committed to continue the maintenance and the support of this useful plugin.
