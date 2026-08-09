@@ -1,65 +1,119 @@
-<?php 
+<?php
 /*
-Plugin Name: Bulglish permalinks
-Plugin URI: https://github.com/talkingaboutthis/bulglish-permalinks
+Plugin Name: Bulglish Permalinks
+Plugin URI: https://github.com/yonkov/bulglish-permalinks
 Description: This plugins transliterates cyrillic URL slugs to latin characters.
-Author: Boyan Raichev 
-Version: 1.4.0
+Author: Boyan Raichev
+Version: 1.5.0
 Author URI: http://talkingaboutthis.eu/
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Requires at least: 4.0
+Requires PHP: 5.6
 */
 
-function bulglish_permalinks_title($text) {
-	
-	$expressions = array(
-		'/[иИ][яЯ]/u' => 'ia',
-		'/[аА]/u' => 'a',
-		'/[бБ]/u' => 'b',
-		'/[вВ]/u' => 'v',
-		'/[гГ]/u' => 'g',
-		'/[дД]/u' => 'd',
-		'/[ѐеЕ]/u' => 'e',
-		'/[ёЁ]/u' => 'ye',
-		'/[жЖ]/u' => 'zh',
-		'/[зЗ]/u' => 'z',
-		'/[иИ]/u' => 'i',
-		'/[ѝЍ]/u' => 'i',
-		'/[йЙ]/u' => 'y',
-		'/[кК]/u' => 'k',
-		'/[лЛ]/u' => 'l',
-		'/[мМ]/u' => 'm',
-		'/[нН]/u' => 'n',
-		'/[оО]/u' => 'o',
-		'/[пП]/u' => 'p',
-		'/[рР]/u' => 'r',
-		'/[сС]/u' => 's',
-		'/[тТ]/u' => 't',
-		'/[уУ]/u' => 'u',
-		'/[фФ]/u' => 'f',
-		'/[хХ]/u' => 'h',
-		'/[цЦ]/u' => 'ts',
-		'/[чЧ]/u' => 'ch',
-		'/[шШ]/u' => 'sh',
-		'/[щЩ]/u' => 'sht',
-		'/[ъЪ]/u' => 'a',
-		'/[ыЫ]/u' => 'y',
-		'/[ь]/u' => 'y',
-		'/[эЭ]/u' => 'e',
-		'/[юЮ]/u' => 'yu',
-		'/[яЯ]/u' => 'ya'		
-	);
-	
-	$text = preg_replace( array_keys($expressions), array_values($expressions), $text );
-	return $text;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
-add_filter('sanitize_title', 'bulglish_permalinks_title', 1);
+
+function bulglish_permalinks_title( $text ) {
+
+	if ( ! is_string( $text ) || '' === $text ) {
+		return $text;
+	}
+
+	// Built once per request. strtr() matches the longest key first, so "ия"
+	// always wins over "и". Upper- and lowercase are listed explicitly, which
+	// keeps the plugin working without the mbstring extension.
+	static $map = array(
+		'ия' => 'ia',
+		'Ия' => 'ia',
+		'иЯ' => 'ia',
+		'ИЯ' => 'ia',
+		'а'  => 'a',
+		'А'  => 'a',
+		'б'  => 'b',
+		'Б'  => 'b',
+		'в'  => 'v',
+		'В'  => 'v',
+		'г'  => 'g',
+		'Г'  => 'g',
+		'д'  => 'd',
+		'Д'  => 'd',
+		'е'  => 'e',
+		'Е'  => 'e',
+		'ѐ'  => 'e',
+		'Ѐ'  => 'e',
+		'ё'  => 'ye',
+		'Ё'  => 'ye',
+		'ж'  => 'zh',
+		'Ж'  => 'zh',
+		'з'  => 'z',
+		'З'  => 'z',
+		'и'  => 'i',
+		'И'  => 'i',
+		'ѝ'  => 'i',
+		'Ѝ'  => 'i',
+		'й'  => 'y',
+		'Й'  => 'y',
+		'к'  => 'k',
+		'К'  => 'k',
+		'л'  => 'l',
+		'Л'  => 'l',
+		'м'  => 'm',
+		'М'  => 'm',
+		'н'  => 'n',
+		'Н'  => 'n',
+		'о'  => 'o',
+		'О'  => 'o',
+		'п'  => 'p',
+		'П'  => 'p',
+		'р'  => 'r',
+		'Р'  => 'r',
+		'с'  => 's',
+		'С'  => 's',
+		'т'  => 't',
+		'Т'  => 't',
+		'у'  => 'u',
+		'У'  => 'u',
+		'ф'  => 'f',
+		'Ф'  => 'f',
+		'х'  => 'h',
+		'Х'  => 'h',
+		'ц'  => 'ts',
+		'Ц'  => 'ts',
+		'ч'  => 'ch',
+		'Ч'  => 'ch',
+		'ш'  => 'sh',
+		'Ш'  => 'sh',
+		'щ'  => 'sht',
+		'Щ'  => 'sht',
+		'ъ'  => 'a',
+		'Ъ'  => 'a',
+		'ы'  => 'y',
+		'Ы'  => 'y',
+		'ь'  => 'y',
+		'Ь'  => 'y',
+		'э'  => 'e',
+		'Э'  => 'e',
+		'ю'  => 'yu',
+		'Ю'  => 'yu',
+		'я'  => 'ya',
+		'Я'  => 'ya',
+	);
+
+	return strtr( $text, $map );
+}
+add_filter( 'sanitize_title', 'bulglish_permalinks_title', 1 );
 
 // now also change filenames!
-function bulglish_filenames( $file ){
-    $file['name'] = bulglish_permalinks_title($file['name']);
-    return $file;
+function bulglish_filenames( $file ) {
+	if ( is_array( $file ) && isset( $file['name'] ) ) {
+		$file['name'] = bulglish_permalinks_title( $file['name'] );
+	}
+	return $file;
 }
-
-if (!defined('CYR2LAT_FILENAMES') OR CYR2LAT_FILENAMES==true) {
-	add_filter('wp_handle_upload_prefilter', 'bulglish_filenames' );
+if ( ! defined( 'CYR2LAT_FILENAMES' ) or CYR2LAT_FILENAMES == true ) {
+	add_filter( 'wp_handle_upload_prefilter', 'bulglish_filenames' );
 }
-?>
