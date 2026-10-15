@@ -4,7 +4,7 @@ Plugin Name: Bulglish Permalinks
 Plugin URI: https://github.com/yonkov/bulglish-permalinks
 Description: This plugins transliterates cyrillic URL slugs to latin characters.
 Author: Boyan Raichev
-Version: 1.5.0
+Version: 1.5.1
 Author URI: http://talkingaboutthis.eu/
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -23,9 +23,7 @@ function bulglish_permalinks_title( $text ) {
 		return $text;
 	}
 
-	// Built once per request. strtr() matches the longest key first, so "ия"
-	// always wins over "и". Upper- and lowercase are listed explicitly, which
-	// keeps the plugin working without the mbstring extension.
+	// The default transliteration map. To customize, use the 'bulglish_permalinks_map' filter.
 	static $map = array(
 		'ия' => 'ia',
 		'Ия' => 'ia',
@@ -102,6 +100,8 @@ function bulglish_permalinks_title( $text ) {
 		'я'  => 'ya',
 		'Я'  => 'ya',
 	);
+
+	$map = apply_filters( 'bulglish_permalinks_map', $map );
 
 	return strtr( $text, $map );
 }

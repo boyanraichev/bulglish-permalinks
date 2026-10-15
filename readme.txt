@@ -2,9 +2,9 @@
 Contributors: studioreforma, nravota12, kozzmen
 Tags: bulgarian, bulgarian permalink, cyrillic, slugs, transliteration 
 Requires at least: 4.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 5.6
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,14 +29,35 @@ It will also work for Russian permalinks, as it matches all the letters in the R
 
 == Frequently Asked Questions ==
 
+= How do I change the transliteration rules? =
+
+You can change the transliteration rules by using the `bulglish_permalinks_map` filter. 
+For example, to transliterate "я" as "ia" instead of "ya", add the following code to your theme's functions.php file:
+
+    function my_bulglish_permalinks_map( $map ) {
+        $map['я'] = 'ia';
+        $map['Я'] = 'ia';
+
+        return $map;
+    }
+    add_filter( 'bulglish_permalinks_map', 'my_bulglish_permalinks_map' );
+
+The filter receives the default transliteration map and must return
+the modified map. Any rules you do not change retain their default
+values.
+
 = How do I stop transliteration of media uploads? =
 
 Put the following in your wp-config.php file: 
-define('CYR2LAT_FILENAMES',false);
+
+	define('CYR2LAT_FILENAMES',false);
 
 == Screenshots ==
 
 == Changelog ==
+
+= 1.5.1 =
+* Allow users to easily update the transliteration map
 
 = 1.5.0 =
 * Project improvements:
