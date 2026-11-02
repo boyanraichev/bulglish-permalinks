@@ -4,7 +4,7 @@ Tags: bulgarian, bulgarian permalink, cyrillic, slugs, transliteration
 Requires at least: 4.0
 Tested up to: 7.1
 Requires PHP: 5.6
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,9 @@ Put the following in your wp-config.php file:
 == Screenshots ==
 
 == Changelog ==
+
+= 1.5.2 =
+* Fix woocommerce product variation terms
 
 = 1.5.1 =
 * Allow users to easily update the transliteration map
